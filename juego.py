@@ -15,11 +15,14 @@ class juego:
         score = puntuacion.pilapuntuacion()
         self.window.addstr(0, 0, "Puntuacion: {}".format(score.size()))
         self.window.timeout(timeout)
+        comida = serpiente.comida(window)
+        comida.generar_comida(score.size())
         while True:
             self.window.clear()
             self.window.border(0)
             self.window.addstr(0, 0, "Puntuacion: {}".format(score.size()))
             snake.pintar()
+            comida.pintar_comida()
             self.window.addstr(34, 0, "Presione P para pausar")
             self.window.addstr(0, self.posiniciousuario - 2, self.usuario)
             event = window.getch()
@@ -36,5 +39,14 @@ class juego:
                     tecla = -1
                     while tecla != 112:
                         tecla = window.getch()
-            
+
             snake.mover()
+            if snake.get_Cabeza().posicionx == comida.coordenadacomidax() and snake.get_Cabeza().posiciony == comida.coordenadacomiday():
+                tipocomida = comida.obtenertipocomida()
+                if tipocomida < 80:
+                    posxcomida = comida.coordenadacomidax()
+                    posycomida = comida.coordenadacomiday()
+                    score.push(posxcomida, posycomida)
+                else:
+                    score.pop()
+                comida.generar_comida(score.size())

@@ -27,6 +27,8 @@ class pilapuntuacion:
         else:
             nodoaux = self.pila
             contador = 1
+            nodoaux = nodoaux.anterior
             while nodoaux:
-                nodoaux = nodoaux.anterior
                 contador += 1
+                nodoaux = nodoaux.anterior
+            return contador

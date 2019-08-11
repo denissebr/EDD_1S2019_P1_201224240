@@ -42,6 +42,9 @@ class cuerposerpiente:
                     if self.direccion == 258 and (direccion == 260 or direccion == 261):
                         self.direccion = direccion
 
+    def get_Cabeza(self):
+        return self.cabeza
+    
     def mover(self):
         if self.direccion == 261: #DERECHA
             nodoaux = self.cabeza
