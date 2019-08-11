@@ -1,6 +1,7 @@
 import curses
 import menu
 import usuario
+import juego
 
 #Tamaño de la ventana
 ALTO = 35
@@ -28,6 +29,11 @@ while True:
     else:
         if event == 49 and not USUARIOACTIVO:
             USUARIOACTIVO = usuarios.mostrarusuarios()
+            if USUARIOACTIVO:
+                pantallajuego = juego.juego(window, USUARIOACTIVO, TIMEOUT)
+        else:
+            if event == 49 and USUARIOACTIVO:
+                pantallajuego = juego.juego(window, USUARIOACTIVO, TIMEOUT)
 
     
 
