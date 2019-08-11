@@ -1,4 +1,5 @@
 from curses import KEY_RIGHT, KEY_LEFT, KEY_UP, KEY_DOWN
+from random import randint
 
 class nodoserpiente:
     def __init__(self, posx, posy, caracter = '#'):
@@ -101,3 +102,31 @@ class cuerposerpiente:
                             posicionxant = auxx
                             posicionyant = auxy
                             nodoaux = nodoaux.siguiente
+                        
+
+class comida:
+    def __init__(self, window):
+        self.window = window
+    
+    def generar_comida(self, score):
+        self.poscomidax = randint(1, 98)
+        self.poscomiday = randint(1, 33)
+        if score == 0:
+            self.tipocomida = 10
+        else:
+            self.tipocomida = randint(1, 100)
+
+    def pintar_comida(self):
+        if self.tipocomida < 80:
+            self.window.addstr(self.poscomiday, self.poscomidax, "+")
+        else:
+            self.window.addstr(self.poscomiday, self.poscomidax, "*")
+
+    def coordenadacomidax(self):
+        return self.poscomidax
+
+    def coordenadacomiday(self):
+        return self.poscomiday
+
+    def obtenertipocomida(self):
+        return self.tipocomida
