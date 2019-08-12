@@ -44,7 +44,46 @@ class cuerposerpiente:
 
     def get_Cabeza(self):
         return self.cabeza
-    
+
+    def size(self):
+        nodoaux = self.cabeza
+        contador = 0
+        while nodoaux:
+            contador += 1
+            nodoaux = nodoaux.siguiente
+
+    def agregar(self):
+        auxanteriorcola = self.cola.anterior
+        if auxanteriorcola.posicionx == self.cola.posicionx:
+            if auxanteriorcola.posiciony > self.cola.posiciony:
+                nodonuevo = nodoserpiente(self.cola.posicionx, self.cola.posiciony - 1)
+                nodonuevo.anterior = self.cola
+                self.cola.siguiente = nodonuevo
+                self.cola = self.cola.siguiente
+            else:
+                nodonuevo = nodoserpiente(self.cola.posicionx, self.cola.posiciony + 1)
+                nodonuevo.anterior = self.cola
+                self.cola.siguiente = nodonuevo
+                self.cola = self.cola.siguiente
+        else:
+            if auxanteriorcola.posiciony == self.cola.posiciony:
+                if auxanteriorcola.posicionx > self.cola.posicionx:
+                    nodonuevo = nodoserpiente(self.cola.posicionx - 1, self.cola.posiciony)
+                    nodonuevo.anterior = self.cola
+                    self.cola.siguiente = nodonuevo
+                    self.cola = self.cola.siguiente
+                else:
+                    nodonuevo = nodoserpiente(self.cola.posicionx + 1, self.cola.posiciony)
+                    nodonuevo.anterior = self.cola
+                    self.cola.siguiente = nodonuevo
+                    self.cola = self.cola.siguiente
+
+    def eliminar(self):
+        nodoaux = self.cola
+        self.cola = self.cola.anterior
+        self.cola.siguiente = None
+        nodoaux.anterior = None
+            
     def mover(self):
         if self.direccion == 261: #DERECHA
             nodoaux = self.cabeza

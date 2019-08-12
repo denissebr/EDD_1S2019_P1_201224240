@@ -47,6 +47,9 @@ class juego:
                     posxcomida = comida.coordenadacomidax()
                     posycomida = comida.coordenadacomiday()
                     score.push(posxcomida, posycomida)
+                    snake.agregar()
                 else:
                     score.pop()
+                    snake.eliminar()
                 comida.generar_comida(score.size())
+                print(comida.obtenertipocomida())

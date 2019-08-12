@@ -6,7 +6,7 @@ import juego
 #Tamaño de la ventana
 ALTO = 35
 ANCHO = 100
-TIMEOUT = 500
+TIMEOUT = 300
 USUARIOACTIVO = ""
 
 curses.initscr()
