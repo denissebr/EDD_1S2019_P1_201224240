@@ -83,6 +83,20 @@ class cuerposerpiente:
         self.cola = self.cola.anterior
         self.cola.siguiente = None
         nodoaux.anterior = None
+
+    def chocar(self):
+        if self.cabeza.posicionx == 99 or self.cabeza.posicionx == 0:
+            return True
+        else:
+            if self.cabeza.posiciony == 34 or self.cabeza.posiciony == 0:
+                return True
+            else:
+                nodoaux = self.cabeza.siguiente
+                while nodoaux:
+                    if self.cabeza.posicionx == nodoaux.posicionx and self.cabeza.posiciony == nodoaux.posiciony:
+                        return True
+                    nodoaux = nodoaux.siguiente
+                return False
             
     def mover(self):
         if self.direccion == 261: #DERECHA
