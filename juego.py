@@ -50,6 +50,12 @@ class juego:
                             self.window.border(0)
                             rep = reportes.reportes(window)
                             rep.pantallagenerarreportesnake(snake.get_Cabeza())
+                        else:
+                            if tecla == 50:
+                                self.window.clear()
+                                self.window.border(0)
+                                rep = reportes.reportes(window)
+                                rep.pantallagenerarreportepunteo(score.get_pila())
                         self.window.clear()
                         self.window.border(0)
                         menupause.menupausa()
@@ -100,6 +106,24 @@ class juego:
                     tecla = self.window.getch()
                     if tecla == 51:
                         break
+                    else:
+                        if tecla == 49:
+                            self.window.clear()
+                            self.window.border(0)
+                            rep = reportes.reportes(window)
+                            rep.pantallagenerarreportesnake(snake.get_Cabeza())
+                            self.window.clear()
+                            self.window.border(0)
+                            menupause.menugameover()
+                        else:
+                            if tecla == 50:
+                                self.window.clear()
+                                self.window.border(0)
+                                rep = reportes.reportes(window)
+                                rep.pantallagenerarreportepunteo(score.get_pila())
+                                self.window.clear()
+                                self.window.border(0)
+                                menupause.menugameover()
 
                 if tecla == 51:
                     break

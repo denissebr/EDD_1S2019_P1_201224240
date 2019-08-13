@@ -21,6 +21,9 @@ class pilapuntuacion:
         self.pila = self.pila.anterior
         nodoaux.anterior = None
 
+    def get_pila(self):
+        return self.pila
+
     def size(self):
         if self.pila is None:
             return 0
