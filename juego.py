@@ -2,6 +2,7 @@ import curses
 import serpiente
 import puntuacion
 import menu
+import reportes
 from curses import KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN
 
 class juego:
@@ -35,15 +36,26 @@ class juego:
                 snake.cambiardireccion(event)
             else:
                 if event == 112:
-                    window.clear()
-                    window.border(0)
+                    self.window.clear()
+                    self.window.border(0)
                     menupause = menu.menu(window)
                     menupause.menupausa()
-                    window.addstr(34, 0, "Presione P para reanudar el juego")
-                    window.addstr(0, self.posiniciousuario - 2, self.usuario)
+                    self.window.addstr(34, 0, "Presione P para reanudar el juego")
+                    self.window.addstr(0, self.posiniciousuario - 2, self.usuario)
                     tecla = -1
                     while tecla != 112:
                         tecla = window.getch()
+                        if tecla == 49:
+                            self.window.clear()
+                            self.window.border(0)
+                            rep = reportes.reportes(window)
+                            rep.pantallagenerarreportesnake(snake.get_Cabeza())
+                        self.window.clear()
+                        self.window.border(0)
+                        menupause.menupausa()
+                        self.window.addstr(34, 0, "Presione P para reanudar el juego")
+                        self.window.addstr(0, self.posiniciousuario - 2, self.usuario)
+                    
                     self.window.clear()
                     self.window.border(0)
                     self.window.addstr(0, 2, "Puntuacion: {}".format(score.size()))
@@ -79,7 +91,16 @@ class juego:
                 print(comida.obtenertipocomida())
 
             if snake.chocar() == True:
-                window.clear()
-                window.border(0)
+                self.window.clear()
+                self.window.border(0)
+                menupause = menu.menu(window)
                 menupause.menugameover()
+                tecla = -1
+                while True:
+                    tecla = self.window.getch()
+                    if tecla == 51:
+                        break
+
+                if tecla == 51:
+                    break
                 #break

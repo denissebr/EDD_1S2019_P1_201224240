@@ -31,11 +31,15 @@ while True:
             USUARIOACTIVO = usuarios.mostrarusuarios()
             if USUARIOACTIVO:
                 pantallajuego = juego.juego(window, USUARIOACTIVO, TIMEOUT)
-                break
+                window.clear()
+                window.border(0)
+                menusnake.pintarmenu()
         else:
             if event == 49 and USUARIOACTIVO:
                 pantallajuego = juego.juego(window, USUARIOACTIVO, TIMEOUT)
-                break
+                window.clear()
+                window.border(0)
+                menusnake.pintarmenu()
     
 
 curses.endwin()
