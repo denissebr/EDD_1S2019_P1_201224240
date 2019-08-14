@@ -32,6 +32,9 @@ class colapuntuacion:
             nodoaux = nodoaux.siguiente
         return cont
 
+    def get_cola(self):
+        return self.iniciocola
+
     def mostrarpuntuaciones(self):
         pos = int((35 - self.size())/2)
         nodoaux = self.iniciocola

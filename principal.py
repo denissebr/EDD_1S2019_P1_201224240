@@ -3,6 +3,7 @@ import menu
 import usuario
 import juego
 import scoreboard
+import reportes
 
 #Tamaño de la ventana
 ALTO = 35
@@ -65,5 +66,14 @@ while True:
                         window.clear()
                         window.border(0)
                         menusnake.pintarmenu()
+                    else:
+                        if event == 52:
+                            window.clear()
+                            window.border(0)
+                            repo = reportes.reportes(window)
+                            repo.pantallaopcionreportes(puntuaciones.get_cola(), usuarios.get_inicio(), usuarios.get_fin())
+                            window.clear()
+                            window.border(0)
+                            menusnake.pintarmenu()
     
 curses.endwin()

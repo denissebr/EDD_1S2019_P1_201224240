@@ -26,6 +26,12 @@ class listausuarios:
             self.fin = nodonuevo
             self.principio.anterior = self.fin
 
+    def get_inicio(self):
+        return self.principio
+
+    def get_fin(self):
+        return self.fin
+
     def mostrarusuarios(self):
         nodoaux = self.principio
         cadenanombre = ""
