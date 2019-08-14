@@ -6,7 +6,7 @@ import reportes
 from curses import KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN
 
 class juego:
-    def __init__(self, window, usuario, timeout):
+    def __init__(self, window, usuario, timeout, puntuacion1):
         self.window = window
         self.window.clear()
         self.timeout = timeout
@@ -16,15 +16,15 @@ class juego:
         self.usuario = usuario
         self.window.addstr(0, self.posiniciousuario - 2, self.usuario)
         snake = serpiente.cuerposerpiente(10, 15, window, timeout)
-        score = puntuacion.pilapuntuacion()
-        self.window.addstr(0, 2, "Puntuacion: {}".format(score.size()))
+        self.score = puntuacion.pilapuntuacion()
+        self.window.addstr(0, 2, "Puntuacion: {}".format(self.score.size()))
         self.window.timeout(timeout)
         comida = serpiente.comida(window)
-        comida.generar_comida(score.size())
+        comida.generar_comida(self.score.size())
         while True:
             self.window.clear()
             self.window.border(0)
-            self.window.addstr(0, 2, "Puntuacion: {}".format(score.size()))
+            self.window.addstr(0, 2, "Puntuacion: {}".format(self.score.size()))
             self.window.addstr(0, 46, "Nivel: {}".format(self.nivel))
             snake.pintar()
             comida.pintar_comida()
@@ -55,7 +55,7 @@ class juego:
                                 self.window.clear()
                                 self.window.border(0)
                                 rep = reportes.reportes(window)
-                                rep.pantallagenerarreportepunteo(score.get_pila())
+                                rep.pantallagenerarreportepunteo(self.score.get_pila())
                         self.window.clear()
                         self.window.border(0)
                         menupause.menupausa()
@@ -64,7 +64,7 @@ class juego:
                     
                     self.window.clear()
                     self.window.border(0)
-                    self.window.addstr(0, 2, "Puntuacion: {}".format(score.size()))
+                    self.window.addstr(0, 2, "Puntuacion: {}".format(self.score.size()))
                     self.window.addstr(0, 46, "Nivel: {}".format(self.nivel))
                     snake.pintar()
                     comida.pintar_comida()
@@ -77,23 +77,23 @@ class juego:
                 if tipocomida < 80:
                     posxcomida = comida.coordenadacomidax()
                     posycomida = comida.coordenadacomiday()
-                    score.push(posxcomida, posycomida)
+                    self.score.push(posxcomida, posycomida)
                     snake.agregar()
-                    auxscore = int(round(score.size() % 15))
-                    if auxscore == 0 and score.size() > 0:
+                    auxscore = int(round(self.score.size() % 15))
+                    if auxscore == 0 and self.score.size() > 0:
                         self.timeout = round(self.timeout / 2)
                         self.window.timeout(self.timeout)
                         self.nivel += 1
                 else:
-                    auxscore = int(round(score.size() % 15))
+                    auxscore = int(round(self.score.size() % 15))
                     if auxscore == 0:
                         self.timeout = self.timeout * 2
                         self.window.timeout(self.timeout)
                         self.nivel -= 1
-                    score.pop()
+                    self.score.pop()
 
                     snake.eliminar()
-                comida.generar_comida(score.size())
+                comida.generar_comida(self.score.size())
                 print(comida.obtenertipocomida())
 
             if snake.chocar() == True:
@@ -101,6 +101,7 @@ class juego:
                 self.window.border(0)
                 menupause = menu.menu(window)
                 menupause.menugameover()
+                #puntuacion1 = score.size()
                 tecla = -1
                 while True:
                     tecla = self.window.getch()
@@ -120,7 +121,7 @@ class juego:
                                 self.window.clear()
                                 self.window.border(0)
                                 rep = reportes.reportes(window)
-                                rep.pantallagenerarreportepunteo(score.get_pila())
+                                rep.pantallagenerarreportepunteo(self.score.get_pila())
                                 self.window.clear()
                                 self.window.border(0)
                                 menupause.menugameover()
@@ -128,3 +129,6 @@ class juego:
                 if tecla == 51:
                     break
                 #break
+
+    def get_score(self):
+        return self.score.size()
