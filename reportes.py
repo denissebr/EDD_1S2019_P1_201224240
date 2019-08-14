@@ -211,7 +211,7 @@ class reportes:
             nodoaux = usuario
             control = 0
             if usuario != fin:
-                print()
+                #print()
                 while nodoaux != fin:
                     grafica += str("usuario" + str(control) + ":sig->usuario" + str(control + 1) + ":ant\n")
                     if nodoaux != principio:
@@ -225,7 +225,7 @@ class reportes:
                 grafica += str("usuario0:sig->usuario0:ant")
                 grafica += str("usuario0:ant->usuario0:sig")
         grafica += str("}")
-        print(grafica)
+        #print(grafica)
         grafo = pydot.graph_from_dot_data(grafica)
         (g,) = grafo
         g.write_jpg(auxnombre + ".jpg")

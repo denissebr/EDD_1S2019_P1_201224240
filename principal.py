@@ -36,7 +36,7 @@ while True:
             if USUARIOACTIVO:
                 pantallajuego = juego.juego(window, USUARIOACTIVO, TIMEOUT, PUNTUACION)
                 PUNTUACION = pantallajuego.get_score()
-                print(PUNTUACION)
+                #print(PUNTUACION)
                 puntuaciones.Queue(USUARIOACTIVO, PUNTUACION)
                 if puntuaciones.size() > 10:
                     puntuaciones.Unqueued()
@@ -47,7 +47,7 @@ while True:
             if event == 49 and USUARIOACTIVO:
                 pantallajuego = juego.juego(window, USUARIOACTIVO, TIMEOUT, PUNTUACION)
                 PUNTUACION = pantallajuego.get_score()
-                print(PUNTUACION)
+                #print(PUNTUACION)
                 puntuaciones.Queue(USUARIOACTIVO, PUNTUACION)
                 if puntuaciones.size() > 10:
                     puntuaciones.Unqueued()
@@ -75,5 +75,13 @@ while True:
                             window.clear()
                             window.border(0)
                             menusnake.pintarmenu()
+                        else:
+                            if event == 53:
+                                window.clear()
+                                window.border(0)
+                                usuarios.carga_masiva()
+                                window.clear()
+                                window.border(0)
+                                menusnake.pintarmenu()
     
 curses.endwin()

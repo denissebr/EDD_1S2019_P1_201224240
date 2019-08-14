@@ -1,4 +1,5 @@
 from curses import KEY_RIGHT, KEY_LEFT
+import os
 
 class nodousuario:
     def __init__(self, nombreusuario):
@@ -101,3 +102,46 @@ class listausuarios:
             else:
                 if event == 50 and nodoaux is not None:
                     return nodoaux.nombre_usuario
+
+    def carga_masiva(self):
+        self.window.addstr(16, 20, "Archivo csv: ")
+        self.window.addstr(17, 20, "Presione Enter para cargar")
+        tecla = -1
+        posx = posicioninicial = 33
+        auxnombre = ""
+        while True:
+            tecla = self.window.getch()
+            if (tecla > 31 and tecla < 127) or tecla == 92:
+                self.window.clear()
+                self.window.border(0)
+                self.window.addstr(16, 20, "Archivo csv: ")
+                self.window.addstr(17, 20, "Presione Enter para cargar")
+                self.window.addstr(16, posicioninicial, auxnombre)
+                self.window.addstr(16, posx, chr(tecla))
+                posx += 1
+                auxnombre += chr(tecla)
+            else:
+                if tecla == 8:
+                    if posx != posicioninicial:
+                        self.window.clear()
+                        self.window.border(0)
+                        self.window.addstr(16, 20, "Archivo csv: ")
+                        self.window.addstr(17, 20, "Presione Enter para cargar")
+                        auxnombre = auxnombre[:-1]
+                        self.window.addstr(16, posicioninicial, auxnombre)
+                        posx -= 1
+                else:
+                    if (tecla == 459 or tecla == 10) and posx != posicioninicial:
+                        if os.path.exists(auxnombre):
+                            archivo = open(auxnombre, "r")
+                            cont = 0
+                            for linea in archivo.readlines():
+                                linea = linea.replace("\n", "")
+                                if cont != 0 and len(linea) > 0:
+                                    self.insetarusuario(linea)
+                                cont+=1
+                            archivo.close
+                            break
+                        else:
+                            self.window.addstr(18, 36, "El archivo no existe.")
+        

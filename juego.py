@@ -94,7 +94,7 @@ class juego:
 
                     snake.eliminar()
                 comida.generar_comida(self.score.size())
-                print(comida.obtenertipocomida())
+                #print(comida.obtenertipocomida())
 
             if snake.chocar() == True:
                 self.window.clear()
